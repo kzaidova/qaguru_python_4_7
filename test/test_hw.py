@@ -4,7 +4,6 @@ from zipfile import ZipFile, ZIP_DEFLATED
 import os
 
 
-
 url_sample_pdf = 'https://docs.pytest.org/_/downloads/en/latest/pdf/'
 url_sample_xls = 'https://file-examples.com/index.php/sample-documents-download/sample-xls-download/'
 response_pdf = requests.get(url_sample_pdf, allow_redirects=True)
@@ -43,7 +42,7 @@ def archive_all_files():
 
 
 
-def read_and_check_row():
+def test_read_and_check_row():
     with ZipFile('resources/Архив.zip') as myzip:
         with myzip.open('resources/latest.pdf', 'r') as myfile:
             row_count = sum(1 for row in myfile)
@@ -69,7 +68,7 @@ def read_and_check_row():
     assert row_count == row_count_arc, 'Кажется файл изменили!'
 
 
-def read_and_check_size():
+def test_read_and_check_size():
     pdf_file_size = os.path.getsize('resources/latest.pdf')
     xlsx_file_size = os.path.getsize('resources/XLSX_10')
     csv_file_size = os.path.getsize('resources/test.csv')
@@ -83,3 +82,5 @@ def read_and_check_size():
     assert sample_size_pdf_in_archive == pdf_file_size, 'Кажется файл изменили!'
     assert sample_size_xlsx_in_archive == xlsx_file_size, 'Кажется файл изменили!'
     assert sample_size_csv_in_archive == csv_file_size, 'Кажется файл изменили!'
+
+
